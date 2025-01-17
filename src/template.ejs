@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <style>
+      .main-div{
+        display: flex;
+        flex-direction: column;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        max-width: 65ch;
+        margin: auto;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-family: "Inter", Arial, Helvetica, sans-serif;
+      }
+      
+      .field-container{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 0.4rem;
+        font-size: 1rem;
+      }
+
+      .field-item{
+        font-weight: bold;
+      }
+
+      .field-date-container{
+        color: #9A9A9A;
+      }
+
+      .field-date-item{
+        font-weight: bold;
+      }
+
+      .message-section {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        text-align: left;
+        margin-top: 2rem;
+        border-top: 1px solid #9A9A9A;
+        padding-top: 2rem;
+      }
+
+      .message-container {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+
+      .message-header {
+        display: flex;
+        flex-direction: row;
+        gap: 0.4rem;
+      }
+
+      .message-header-username {
+        font-weight: bold;
+      }
+
+      .message-header-date {
+        color: #9A9A9A;
+      }
+
+    </style>
+</head>
+<body>
+  <div class="main-div">
+    <h1>Service Report</h1>
+
+    <div class="field-container">
+      <span class="field-item">
+        Rating:
+      </span>
+      <span class="filed-value">
+        <%= rate %>
+      </span>
+    </div>
+
+    <div class="field-container">
+      <span class="field-item">
+        User ID:
+      </span>
+      <span class="filed-value">
+        <%= user_id %>
+      </span>
+    </div>
+
+    <div class="field-container">
+      <span class="field-item">
+        Ticket ID:
+      </span>
+      <span class="filed-value">
+        <%= ticket_id %>
+      </span>
+    </div>
+
+    <div style="margin-top: 2rem;"></div>
+
+    <div class="field-date-container">
+      <span class="field-date-item">
+        Opened on:
+      </span>
+      <span class="filed-date-value">
+        <%= create_date %>
+      </span>
+    </div>
+
+    <div class="field-date-container">
+      <span class="field-date-item">
+        Closed on:
+      </span>
+      <span class="filed-date-value">
+        <%= final_date %>
+      </span>
+    </div>
+
+    <span style="font-weight: bold; margin-top: 2rem;">Chat Messages:</span>
+
+    <div class="message-section">
+        <% for (const message of messages) { %>
+          <div class="message-container">
+            <div class="message-header">
+              <span class="message-header-username"><%= message.username %></span>
+              <span class="message-header-date"><%= message.created_at %></span>
+            </div>
+            <div class="message-body">
+              <span class="message-body-content"><%= message.content %></span>
+            </div>
+          </div>
+        <% } %>
+    </div>
+  </div>
+</body>
+
+</html>

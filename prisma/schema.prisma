@@ -1,0 +1,49 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Ticket {
+  id String @id @default(uuid()) @unique
+  ticket_id String @unique 
+  discord_user_id String
+  discord_channel_id String @unique
+  discord_guild_id String
+  discord_guild_name String
+  rate String @default("pending")
+  isOpen Boolean @default(true)
+  messages Message[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  closed_at DateTime? 
+}
+
+model Message {
+  id String @id @default(uuid()) @unique
+  content String
+  username String
+  discord_user_id String
+  discord_channel Ticket @relation(fields: [discord_channel_id], references: [discord_channel_id])
+  discord_channel_id String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model Guild {
+  id String @id @default(uuid()) @unique
+  guild_name String
+  guild_id String @unique
+  files_channel String? 
+  ticket_channel String?
+  moderator_role String?
+}

@@ -1,0 +1,19 @@
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: prisma_postgres
+    restart: always
+    ports:
+      - "5435:5432" # Expose PostgreSQL on port 5432
+    expose:
+      - 5435
+    environment:
+      POSTGRES_USER: prisma_user
+      POSTGRES_PASSWORD: prisma_password
+      POSTGRES_DB: prisma_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
