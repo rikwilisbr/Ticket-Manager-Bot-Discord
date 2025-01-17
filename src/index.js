@@ -20,11 +20,6 @@ if (!TOKEN || !CLIENT_ID) {
 }
 
 const commands = [
-    {
-        name: "ping",
-        description: "Replies with Pong!",
-    },
-
     new SlashCommandBuilder()
         .setName('ticket')
         .setDescription('Create a new ticket.')
